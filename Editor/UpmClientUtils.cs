@@ -61,6 +61,8 @@ namespace NpmPublisherSupport
                 }
                 catch (Exception ex)
                 {
+                    var packageError = $"PACKAGE ERROR: NAME {localPackage?.name} \n VALUE {localPackage?.text}";
+                    Debug.LogError(packageError, localPackage);
                     Debug.LogException(ex);
                 }
             }
