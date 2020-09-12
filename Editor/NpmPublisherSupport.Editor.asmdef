@@ -5,7 +5,6 @@
         "NpmPackageLoader",
         "NpmPackageLoader.Editor"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -15,5 +14,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [
+        {
+            "name": "com.codewriter.npm-package-loader",
+            "expression": "0.0.1",
+            "define": "NPM_PACKAGE_LOADER"
+        }
+    ],
+    "noEngineReferences": false
 }

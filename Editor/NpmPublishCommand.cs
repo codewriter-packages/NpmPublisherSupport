@@ -1,7 +1,9 @@
 using System;
 using System.IO;
 using System.Linq;
+#if NPM_PACKAGE_LOADER
 using NpmPackageLoader;
+#endif
 using UnityEditor;
 using UnityEngine;
 
@@ -33,27 +35,30 @@ namespace NpmPublisherSupport
                 CopyDirectoryIfExists(packageJsonAsset, "Samples", "Samples~");
             }
 
+#if NPM_PACKAGE_LOADER
             var packageJsonPath = AssetDatabase.GetAssetPath(packageJsonAsset);
             var packageExternalLoaders = AssetDatabase
                 .FindAssets($"t:{typeof(Loader).FullName}", new[] {Path.GetDirectoryName(packageJsonPath)})
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .Select(AssetDatabase.LoadAssetAtPath<Loader>)
                 .ToList();
-
+#endif
             void Step(int index)
             {
-                if (index == packageExternalLoaders.Count)
-                {
-                    NpmCommands.SetWorkingDirectory(packageJsonAsset);
-                    NpmCommands.Publish((code, result) => callback(), NpmPublishWindow.Registry);
-                }
-                else
+#if NPM_PACKAGE_LOADER
+                if (index != packageExternalLoaders.Count)
                 {
                     var loader = packageExternalLoaders[index];
 
                     loader.Export(packageJsonAsset,
                         () => Step(index + 1),
                         () => Debug.LogError($"Failed to export {loader.name}"));
+                }
+                else
+#endif
+                {
+                    NpmCommands.SetWorkingDirectory(packageJsonAsset);
+                    NpmCommands.Publish((code, result) => callback(), NpmPublishWindow.Registry);
                 }
             }
 

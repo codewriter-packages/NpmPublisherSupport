@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+#if NPM_PACKAGE_LOADER
 using NpmPackageLoader;
+#endif
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -32,8 +34,9 @@ namespace NpmPublisherSupport
         [SerializeField] private string directory = "";
         [SerializeField] private Package package = new Package();
         [SerializeField] private string[] packageJsonLines = new string[0];
+#if NPM_PACKAGE_LOADER
         [SerializeField] private List<Loader> packageExternalLoaders = new List<Loader>();
-
+#endif
         [SerializeField] private string registryInput = "";
         [SerializeField] private Vector2 packageJsonScroll;
 
@@ -56,12 +59,13 @@ namespace NpmPublisherSupport
             var packageJsonFormatted = MiniJSON.Json.Serialize(packageJsonObj);
             packageJsonLines = packageJsonFormatted.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
 
+#if NPM_PACKAGE_LOADER
             packageExternalLoaders = AssetDatabase
                 .FindAssets($"t:{typeof(Loader).FullName}", new[] {Path.GetDirectoryName(path)})
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .Select(AssetDatabase.LoadAssetAtPath<Loader>)
                 .ToList();
-
+#endif
             Repaint();
         }
 
@@ -357,6 +361,7 @@ namespace NpmPublisherSupport
 
         private bool DrawPackageExternalLoaders()
         {
+#if NPM_PACKAGE_LOADER
             var npmPackageLoader = NpmPublishPreferences.NpmPackageLoader;
 
             if (packageExternalLoaders.Count == 0)
@@ -397,6 +402,9 @@ namespace NpmPublisherSupport
             GUILayout.EndVertical();
 
             return true;
+#else
+            return false;
+#endif
         }
 
         private void UpdateVersion(NpmVersion version)
