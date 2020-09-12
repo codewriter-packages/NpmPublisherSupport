@@ -1,4 +1,4 @@
-# Npm Publisher Support [![Stars](https://img.shields.io/github/stars/vanifatovvlad/NpmPublisherSupport.svg?style=social)](https://github.com/vanifatovvlad/NpmPublisherSupport/stargazers) [![Watchers](https://img.shields.io/github/watchers/vanifatovvlad/NpmPublisherSupport.svg?style=social)](https://github.com/vanifatovvlad/NpmPublisherSupport/watchers)
+# Npm Publisher Support [![Github license](https://img.shields.io/github/license/codewriter-packages/NpmPublisherSupport.svg)](#)
 
 A tool for managing [Unity](https://unity.com/) projects with multiple [UnityPackageManager](https://docs.unity3d.com/Packages/com.unity.package-manager-ui@1.8/manual/index.html) packages.
 <br/>
@@ -55,38 +55,8 @@ Assets/
 #### Step 2. Login
 [![](https://user-images.githubusercontent.com/26966368/73605873-fa0ff100-45b4-11ea-99e4-1f20508798e1.png)](#)
 #### Step 3. Publish
-
-### Dependencies
-Npm Published Support package depends on:
-* [Npm Package Loader](https://github.com/vanifatovvlad/NpmPublisherSupport/tree/master/Assets/NpmPackageLoader/Sources) allows you to pack assets from your package into unitypackage and upload it to a dedicated FTP server, which allow to bypass the npm package size limit
-[![Npm Package Loader Preview](https://user-images.githubusercontent.com/26966368/73606572-ba4d0780-45bc-11ea-858c-7f85d581129e.png)](#)
-* [Unity Editor Coroutines](https://docs.unity3d.com/Packages/com.unity.editorcoroutines@0.0/manual/index.html) allows the user to start the execution of iterator methods within the Editor similar to how we handle Coroutines inside MonoBehaviour scripts during runtime
+Click `Publish` button.
 
 ### Install
-[![NPM](https://nodei.co/npm/com.codewriter.npm-publisher-support.png)](https://www.npmjs.com/package/com.codewriter.npm-publisher-support)
-
-Npm package is available at [npmjs.com](https://www.npmjs.com/package/com.codewriter.npm-publisher-support). To use it, add the following line to dependencies section of your `manifest.json`. Unity should download and link the package automatically:
-```json
-{
-  "scopedRegistries": [
-    {
-      "name": "NpmJS",
-      "url": "https://registry.npmjs.org/",
-      "scopes": [
-        "com.codewriter"
-      ]
-    }
-  ],
-  "dependencies": {
-    "com.codewriter.npm-publisher-support": "0.6.0"
-  }
-}
-```
-
-### README Badge
-
-Using NPM Publisher Support? Add a README badge to show it off: [![NPM Publisher Support](https://img.shields.io/badge/maintained%20with-NPM%20Publisher%20Support-blue.svg)](https://github.com/vanifatovvlad/NpmPublisherSupport)
-
-```
-[![NPM Publisher Support](https://img.shields.io/badge/maintained%20with-NPM%20Publisher%20Support-blue.svg)](https://github.com/vanifatovvlad/NpmPublisherSupport)
-```
+Library distributed as git package ([How to install package from git URL](https://docs.unity3d.com/Manual/upm-ui-giturl.html))
+<br>Git URL: `https://github.com/codewriter-packages/NpmPublisherSupport.git`
