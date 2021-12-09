@@ -186,6 +186,8 @@ namespace NpmPublisherSupport
 
                 var rect = args.rowRect;
 
+                EditorGUI.DrawRect(new Rect(rect) {yMin = rect.yMax - 1}, Color.gray);
+
                 if (CompactMode)
                 {
                     GUI.Label(rect, item.displayName, EditorStyles.largeLabel);
