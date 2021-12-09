@@ -311,11 +311,11 @@ namespace NpmPublisherSupport
         public static TextAsset GetPackageJson(string path)
         {
             if (path == null) return null;
-            if (!path.StartsWith("Assets/")) return null;
 
             TextAsset packageAsset;
             if (path.EndsWith("/package.json") &&
-                (packageAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(path)) != null)
+                (packageAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(path)) != null &&
+                UpmClientUtils.IsInProjectPackage(packageAsset))
             {
                 return packageAsset;
             }
@@ -326,7 +326,8 @@ namespace NpmPublisherSupport
             {
                 var packageJsonPath = path + suffix;
                 packageAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(packageJsonPath);
-                if (packageAsset != null)
+                if (packageAsset != null &&
+                    UpmClientUtils.IsInProjectPackage(packageAsset))
                 {
                     return packageAsset;
                 }
@@ -334,7 +335,7 @@ namespace NpmPublisherSupport
 
             return null;
         }
-        
+
         public static string GetPackageRootFolder(TextAsset packageJsonAsset)
         {
             var path = AssetDatabase.GetAssetPath(packageJsonAsset);

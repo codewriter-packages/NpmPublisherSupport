@@ -128,7 +128,7 @@ namespace NpmPublisherSupport
 
             if (string.IsNullOrEmpty(directory))
             {
-                directory = NpmCommands.GetPackageDirectory(packageAsset);
+                directory = UpmClientUtils.GetPackageDirectory(packageAsset);
             }
 
             NpmUtils.WorkingDirectory = directory;

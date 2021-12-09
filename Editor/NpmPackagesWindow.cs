@@ -147,7 +147,7 @@ namespace NpmPublisherSupport
             {
                 var root = new TreeViewItem {id = -1, depth = -1, displayName = "Root"};
 
-                var search = searchString.ToLower();
+                var search = searchString?.ToLower() ?? "";
 
                 var children = UpmClientUtils.FindLocalPackages()
                     .Select((packageAsset, index) => new PackageTreeViewItem(index, packageAsset))

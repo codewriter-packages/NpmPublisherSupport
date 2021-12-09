@@ -67,7 +67,7 @@ namespace NpmPublisherSupport
 
         private static void CopyDirectoryIfExists(TextAsset packageJsonAsset, string src, string dst)
         {
-            var packageDirectory = NpmCommands.GetPackageDirectory(packageJsonAsset);
+            var packageDirectory = UpmClientUtils.GetPackageDirectory(packageJsonAsset);
 
             var documentationSrcPath = packageDirectory + src;
             var documentationDstPath = packageDirectory + dst;

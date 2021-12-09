@@ -211,22 +211,10 @@ namespace NpmPublisherSupport
                 return null;
             }
         }
-
-        public static string GetPackageDirectory(TextAsset package)
-        {
-            var assetPath = AssetDatabase.GetAssetPath(package);
-            var path = Application.dataPath;
-            path = path.Substring(0, path.Length - "Assets".Length);
-            path = path + AssetDatabase.GetAssetPath(package);
-            var fileName = Path.GetFileName(assetPath);
-            path = path.Substring(0, path.Length - fileName.Length);
-            var directory = Path.GetFullPath(path);
-            return directory;
-        }
-
+        
         public static void SetWorkingDirectory(TextAsset package)
         {
-            var directory = GetPackageDirectory(package);
+            var directory = UpmClientUtils.GetPackageDirectory(package);
             NpmUtils.WorkingDirectory = directory;
         }
     }

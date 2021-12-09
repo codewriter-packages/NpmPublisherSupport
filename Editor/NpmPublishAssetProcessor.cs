@@ -15,7 +15,7 @@ namespace NpmPublisherSupport
 
             foreach (string asset in importedAssets)
             {
-                if (asset.StartsWith("Assets/") && asset.EndsWith("/package.json"))
+                if (asset.EndsWith("/package.json"))
                 {
                     PackageImported.Invoke();
                     return;

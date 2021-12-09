@@ -72,9 +72,34 @@ namespace NpmPublisherSupport
         {
             return AssetDatabase.FindAssets("package t:TextAsset")
                 .Select(AssetDatabase.GUIDToAssetPath)
-                .Where(path => path.StartsWith("Assets/") && path.EndsWith("/package.json"))
+                .Where(path => path.EndsWith("/package.json"))
                 .Select(AssetDatabase.LoadAssetAtPath<TextAsset>)
+                .Where(IsInProjectPackage)
                 .ToList();
+        }
+
+        public static string GetPackageDirectory(TextAsset package)
+        {
+            var assetPath = AssetDatabase.GetAssetPath(package);
+            var path = Application.dataPath;
+            path = path.Substring(0, path.Length - "Assets".Length);
+            path = path + AssetDatabase.GetAssetPath(package);
+            var fileName = Path.GetFileName(assetPath);
+            path = path.Substring(0, path.Length - fileName.Length);
+            var directory = Path.GetFullPath(path);
+            return directory;
+        }
+
+        public static bool IsInProjectPackage(TextAsset packageJson)
+        {
+            var realPath = GetPackageDirectory(packageJson)
+                .Replace(Path.DirectorySeparatorChar, '/');
+
+            var dataPath = Application.dataPath;
+            dataPath = dataPath.Substring(0, dataPath.Length - "/Assets".Length);
+
+            return realPath.StartsWith(dataPath + "/Assets")
+                   || realPath.StartsWith(dataPath + "/Packages");
         }
 
         public static string GetPackageVersion(string name, PackageVersionType type)
