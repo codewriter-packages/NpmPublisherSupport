@@ -97,6 +97,11 @@ namespace NpmPublisherSupport
 
         private void PackageImported()
         {
+            if (_treeView == null)
+            {
+                return;
+            }
+            
             _treeView.Reload();
             Repaint();
         }
