@@ -17,6 +17,6 @@
     "tool"
   ],
   "dependencies": {
-    "com.unity.editorcoroutines": "0.1.0-preview.1"
+    "com.unity.editorcoroutines": "1.0.0"
   }
 }
