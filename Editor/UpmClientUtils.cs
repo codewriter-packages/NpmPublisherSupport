@@ -26,7 +26,7 @@ namespace NpmPublisherSupport
 
         public static void ListPackages(Action callback)
         {
-            _listRequest = Client.List();
+            _listRequest = Client.List(offlineMode: false, includeIndirectDependencies: true);
             EditorCoroutineUtility.StartCoroutineOwnerless(ListPackagesRoutine(callback));
         }
 
@@ -39,6 +39,8 @@ namespace NpmPublisherSupport
 
             foreach (var packageInfo in _listRequest.Result)
             {
+                Debug.LogError(packageInfo.name);
+                
                 SetPackageVersion(packageInfo.name, PackageVersionType.UpmLatest,
                     packageInfo.versions.latestCompatible);
             }
