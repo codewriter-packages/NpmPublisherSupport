@@ -60,9 +60,11 @@ namespace NpmPublisherSupport
             packageJsonLines = packageJsonFormatted.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
 
 #if NPM_PACKAGE_LOADER
+            var packageExternalLoadersFolder = Path.GetDirectoryName(path) ?? string.Empty;
             packageExternalLoaders = AssetDatabase
-                .FindAssets($"t:{typeof(Loader).FullName}", new[] {Path.GetDirectoryName(path)})
+                .FindAssets($"t:{typeof(Loader).FullName}")
                 .Select(AssetDatabase.GUIDToAssetPath)
+                .Where(it => it.StartsWith(packageExternalLoadersFolder))
                 .Select(AssetDatabase.LoadAssetAtPath<Loader>)
                 .ToList();
 #endif
