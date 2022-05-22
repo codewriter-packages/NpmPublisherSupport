@@ -39,8 +39,6 @@ namespace NpmPublisherSupport
 
             foreach (var packageInfo in _listRequest.Result)
             {
-                Debug.LogError(packageInfo.name);
-                
                 SetPackageVersion(packageInfo.name, PackageVersionType.UpmLatest,
                     packageInfo.versions.latestCompatible);
             }
